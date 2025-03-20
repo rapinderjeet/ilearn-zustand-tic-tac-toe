@@ -3,29 +3,34 @@ import { combine } from "zustand/middleware";
 
 export const useGameStore = create(
   combine(
-    {
-      squares: Array(9).fill(null),
-      xIsNext: true,
-    },
+    { history: [Array(9).fill(null)], currentMove: 0, xIsNext: true },
     (set) => {
       return {
-        setSquares: (nextSquares) => {
+        setHistory: (nextHistory) => {
           set((state) => ({
-            squares:
-              typeof nextSquares === "function"
-                ? nextSquares(state.squares)
-                : nextSquares,
-          }));
+            history:
+              typeof nextHistory === 'function'
+                ? nextHistory(state.history)
+                : nextHistory,
+          }))
+        },
+        setCurrentMove: (nextCurrentMove) => {
+          set((state) => ({
+            currentMove:
+              typeof nextCurrentMove === 'function'
+                ? nextCurrentMove(state.currentMove)
+                : nextCurrentMove,
+          }))
         },
         setXIsNext: (nextXIsNext) => {
           set((state) => ({
             xIsNext:
-              typeof nextXIsNext === "function"
+              typeof nextXIsNext === 'function'
                 ? nextXIsNext(state.xIsNext)
                 : nextXIsNext,
-          }));
+          }))
         },
-      };
-    }
-  )
-);
+      }
+    },
+  ),
+)

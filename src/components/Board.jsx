@@ -1,11 +1,6 @@
 import Square from "./Square";
-import { useGameStore } from "./../stores/GameStore";
 
-export default function Board() {
-  const xIsNext = useGameStore((state) => state.xIsNext);
-  const setXIsNext = useGameStore((state) => state.setXIsNext);
-  const squares = useGameStore((state) => state.squares);
-  const setSquares = useGameStore((state) => state.setSquares);
+export default function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   const turns = calculateTurns(squares);
   const player = xIsNext ? "X" : "O";
@@ -15,8 +10,7 @@ export default function Board() {
     if (squares[i] || winner) return;
     const nextSquares = squares.slice();
     nextSquares[i] = player;
-    setSquares(nextSquares);
-    setXIsNext(!xIsNext);
+    onPlay(nextSquares);
   }
 
   function calculateWinner(squares) {
@@ -33,6 +27,7 @@ export default function Board() {
 
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
+
       if (
         squares[a] &&
         squares[a] === squares[b] &&
