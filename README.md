@@ -1,3 +1,5 @@
+![Project Image](https://raw.githubusercontent.com/rapinderjeet/ilearn-zustand-tic-tac-toe/main/project-image.png)
+
 # Tic-Tac-Toe Game
 
 This is a simple Tic-Tac-Toe game built using **Vite**, **React**, and **Zustand**. This project was created as a learning exercise to explore modern front-end technologies and state management with Zustand.
